@@ -1,5 +1,6 @@
 from django.db import models
-
+from utils.model_validators import validate_png
+from utils.images import resize_image
 
 class MenuLink(models.Model):
     class Meta:
@@ -31,6 +32,20 @@ class SiteSetup(models.Model):
     show_pagination = models.BooleanField(default=True)
     show_footer = models.BooleanField(default=True)
     
+    favicon = models.ImageField(
+        upload_to= 'assets/favicon/%Y/%m/',
+        blank=True, default='',
+        validators=[validate_png]
+    )
+    def save(self, *args, **kwargs):
+        curret_favicon_name= str(self.favicon.name)
+        print('curret_favicon_name', curret_favicon_name)
+        super().save(*args, **kwargs)
+        fave_icon_change = False
+        if self.favicon:
+            fave_icon_change=curret_favicon_name != self.favicon.name
+        if fave_icon_change:
+            resize_image(self.favicon, 32)
     
     def __str__(self):
         return self.title
