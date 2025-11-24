@@ -24,22 +24,6 @@ category: global
 }
 
 /* @docs
-label: Line Sizing
-
-note: |
-  Consistent line-spacing,
-  even when inline elements have different line-heights.
-
-links:
-  - https://drafts.csswg.org/css-inline-3/#line-sizing-property
-
-category: global
-*/
-html {
-  line-sizing: normal;
-}
-
-/* @docs
 label: Body Margins
 
 note: |
@@ -57,7 +41,7 @@ label: Hidden Attribute
 note: |
   Maintain `hidden` behaviour when overriding `display` values.
 
-  category: global
+category: global
 */
 [hidden] {
   display: none;
@@ -137,9 +121,8 @@ label: Responsive Embeds
 
 note: |
   1. Block display is usually what we want
-  2. The `vertical-align` removes strange space-below in case authors overwrite the display value
-  3. Responsive by default
-  4. Audio without `[controls]` remains hidden by default
+  2. Responsive by default
+  3. Audio without `[controls]` remains hidden by default
 
 category: embedded elements
 */
@@ -152,7 +135,6 @@ iframe,
 embed,
 object {
   display: block;
-  vertical-align: middle;
   max-width: 100%;
 }
 audio:not([controls]) {
@@ -163,12 +145,7 @@ audio:not([controls]) {
 label: Responsive Images
 
 note: |
-  These new elements display inline by default,
-  but that's not the expected behavior for either one.
-  This can interfere with proper layout and aspect-ratio handling.
-
-  1. Remove the unnecessary wrapping `picture`, while maintaining contents
-  2. Source elements have nothing to display, so we hide them entirely
+  Remove unnecessary wrapping `picture`, while maintaining contents
 
 category: embedded elements
 */
@@ -184,9 +161,6 @@ label: Aspect Ratios
 
 note: |
   Maintain intrinsic aspect ratios when `max-width` is applied.
-  `iframe`, `embed`, and `object` are also embedded,
-  but have no intrinsic ratio,
-  so their `height` needs to be set explicitly.
 
 category: embedded elements
 */
@@ -201,8 +175,7 @@ canvas {
 label: Audio Width
 
 note: |
-  There is no good reason elements default to 300px,
-  and audio files are unlikely to come with a width attribute.
+  Audio defaults to 300px width, remove that.
 
 category: embedded elements
 */
@@ -239,10 +212,6 @@ label: HTML5 Elements
 
 note: |
   Default block display on HTML5 elements.
-  For oldIE to apply this styling one needs to add some JS as well (i.e. `document.createElement("main")`)
-
-links:
-  - https://www.sitepoint.com/html5-older-browsers-and-the-shiv/
 
 category: legacy browsers
 */
